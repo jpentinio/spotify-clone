@@ -11,6 +11,7 @@ export type CurrentTrackType = {
   item: {
     name: string;
     id: string;
+    uri: string;
     artists: ArtistType;
     album: {
       images: ImageType;

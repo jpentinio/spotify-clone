@@ -19,6 +19,7 @@ class Actions {
             item: {
               name: response.data.item.name,
               id: response.data.item.id,
+              uri: response.data.item.uri,
               artists: response.data.item.artists,
               album: {
                 images: response.data.item.album.images,

@@ -22,6 +22,7 @@ const initialState = {
       item: {
         name: "",
         id: "",
+        uri: "",
         artists: [],
         album: {
           images: [],
