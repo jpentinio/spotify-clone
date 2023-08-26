@@ -33,7 +33,7 @@ const Home = () => {
                   id={item.track.id}
                   name={item.track.name}
                   image={item.track.album.images[0]?.url}
-                  artists={item.track.artists.map((item) => item.name)}
+                  artists={item.track.artists.map((item) => item)}
                   albumId={item.track.album.id}
                   uri={item.track.uri}
                 />
@@ -55,7 +55,7 @@ const Home = () => {
                   name={item.name}
                   id={item.id}
                   image={item.images[0]?.url}
-                  artists={item.artists.map((item) => item.name)}
+                  artists={item.artists.map((item) => item)}
                   albumId={item.id}
                   uri={item.uri}
                 />

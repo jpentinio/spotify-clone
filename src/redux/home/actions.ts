@@ -58,6 +58,7 @@ class Actions {
                 artists: item.artists,
                 id: item.id,
                 images: item.images,
+                uri: item.uri,
               };
             }
           ),

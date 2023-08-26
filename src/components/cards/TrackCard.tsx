@@ -2,6 +2,7 @@ import { FaPlay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
 import Actions from "../../redux/track/actions";
+import { ArtistType } from "../../types/home.actionTypes";
 
 const TrackCard = ({
   name,
@@ -14,7 +15,7 @@ const TrackCard = ({
   name: string;
   id: string;
   image: string;
-  artists: string[];
+  artists: ArtistType;
   albumId: string;
   uri: string;
 }) => {
@@ -48,7 +49,20 @@ const TrackCard = ({
       <div className="flex flex-col gap-2">
         <div className="font-bold truncate text-md">{name}</div>
         <div className="text-xs font-semibold text-artistColor truncate">
-          {artists.map((artist) => artist).join(", ")}
+          {artists.map((artist, i) => (
+            <span key={i}>
+              {i > 0 && ", "}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/artist/${artist.id}`);
+                }}
+                className="cursor-pointer hover:underline"
+              >
+                {artist.name}
+              </span>
+            </span>
+          ))}
         </div>
       </div>
     </div>

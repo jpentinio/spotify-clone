@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import Actions from "../redux/album/actions";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { albumColors } from "../constants";
 import { FaPlay } from "react-icons/fa";
@@ -10,19 +10,20 @@ import { SlOptions } from "react-icons/sl";
 import TracksTable from "../components/TracksTable";
 import TrackActions from "../redux/track/actions";
 
+export function getRandomColorFromArray() {
+  if (albumColors.length === 0) {
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * albumColors.length);
+  return albumColors[randomIndex];
+}
+
 const Album = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state?.album.data);
-
-  function getRandomColorFromArray() {
-    if (albumColors.length === 0) {
-      return null;
-    }
-
-    const randomIndex = Math.floor(Math.random() * albumColors.length);
-    return albumColors[randomIndex];
-  }
 
   const handleSetTrack = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -50,8 +51,20 @@ const Album = () => {
           <p className="capitalize text-sm">{data.albumType}</p>
           <h1 className="text-5xl font-bold drop-shadow-2xl">{data.name}</h1>
           <div className="flex gap-1 text-sm font-semibold">
-            <span>{data.artists.map((artist) => artist.name).join(", ")}</span>•
-            <span>{moment(data?.releaseDate).format("YYYY")}</span>•
+            <span>
+              {data.artists.map((artist, i) => (
+                <span key={i}>
+                  {i > 0 && ", "}
+                  <span
+                    onClick={() => navigate(`/artist/${artist.id}`)}
+                    className="cursor-pointer hover:underline"
+                  >
+                    {artist.name}
+                  </span>
+                </span>
+              ))}
+            </span>
+            •<span>{moment(data?.releaseDate).format("YYYY")}</span>•
             <span>{data.totalTracks} songs</span>
           </div>
         </div>
