@@ -3,14 +3,16 @@ import { useLocation } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import { useEffect, useRef } from "react";
-import { useAppSelector } from "./hooks";
+import { useAppDispatch, useAppSelector } from "./hooks";
 import { useState } from "react";
 import BottomNavigation from "./components/BottomNavigation";
+import Actions from "./redux/userProfile/actions";
 
 export function PrivateRoutes() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.userProfile);
-  const accessToken = localStorage.getItem("access_token");
+  const accessToken = localStorage.getItem("access_token") || "";
   const location = useLocation();
   const queryParameters = new URLSearchParams(location.hash);
 
@@ -34,6 +36,7 @@ export function PrivateRoutes() {
   const [positionTop, setPositionTop] = useState(0);
 
   useEffect(() => {
+    dispatch(Actions.getUserProfile(accessToken));
     const handleScroll = () => {
       const el: any = myElementRef.current;
       setPositionTop(el.scrollTop);

@@ -29,6 +29,7 @@ class Actions {
                 id: item.track.id,
                 type: item.track.type,
                 album: item.track.album,
+                uri: item.track.uri,
               },
             };
           }),

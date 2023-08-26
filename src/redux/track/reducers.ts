@@ -4,6 +4,7 @@ import {
   GET_CURRENT_PLAYING_TRACK_FAILED,
   GET_CURRENT_PLAYING_TRACK_START,
   GET_CURRENT_PLAYING_TRACK_SUCCESS,
+  SET_TRACK,
 } from "../../types/track.actionTypes";
 
 interface CurrentPlayingTrackState {
@@ -12,6 +13,7 @@ interface CurrentPlayingTrackState {
     isLoading: boolean;
     error: string;
   };
+  selectedTrack: string;
 }
 
 type TrackStateTypes = CurrentPlayingTrackState;
@@ -35,6 +37,7 @@ const initialState = {
     isLoading: false,
     error: "",
   },
+  selectedTrack: "",
 };
 
 type DispatchTypes = CurrentlyPlayingTrackDispatchTypes;
@@ -71,6 +74,12 @@ export const trackReducer = (
           isLoading: false,
           error: action.payload,
         },
+      };
+    }
+    case SET_TRACK: {
+      return {
+        ...state,
+        selectedTrack: action.payload,
       };
     }
     default:

@@ -26,7 +26,9 @@ export type RecentlyPlayedTracksType = {
     type: string;
     album: {
       images: ImageType;
+      id: string;
     };
+    uri: string;
   };
 };
 
@@ -35,6 +37,7 @@ export type NewAlbumReleasesType = {
   id: string;
   artists: ArtistType;
   images: ImageType;
+  uri: string;
 };
 
 // Recently Played Tracks

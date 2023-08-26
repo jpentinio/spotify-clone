@@ -38,12 +38,15 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
 
   return (
     <div
-      className={`fixed px-6 py-2 bg-transparent flex justify-between items-center left-[330px] right-[18px] ${
+      className={`fixed z-10 px-6 py-2 bg-transparent flex justify-between items-center left-[330px] right-[18px] ${
         positionTop >= 100 ? "bg-zinc-800" : "bg-transparent"
       }`}
     >
       <div className="flex gap-2">
-        <button className="bg-black w-8 h-8 rounded-full flex items-center justify-center">
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-black w-8 h-8 rounded-full flex items-center justify-center"
+        >
           <GoChevronLeft className="w-5 h-5" />
         </button>
         <button className="bg-black w-8 h-8 rounded-full flex items-center justify-center">

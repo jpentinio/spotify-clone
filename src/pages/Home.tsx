@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import Actions from "../redux/userProfile/actions";
 import HomeActions from "../redux/home/actions";
-import AlbumCard from "../components/cards/AlbumCard";
+import TrackCard from "../components/cards/TrackCard";
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const accessToken = localStorage.getItem("access_token") || "";
+
   const recentlyPlayedTracks = useAppSelector(
     (state) => state?.home?.recentlyPlayedTracks.data
   );
@@ -15,7 +15,6 @@ const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(Actions.getUserProfile(accessToken));
     dispatch(HomeActions.getRecentlyPlayedTracks());
     dispatch(HomeActions.getNewAlbumReleases());
   }, []);
@@ -28,12 +27,15 @@ const Home = () => {
               Recently Played
             </h1>
             <div className="my-6 grid grid-cols-6 gap-6">
-              {recentlyPlayedTracks.map((item) => (
-                <AlbumCard
-                  key={item.track.id}
+              {recentlyPlayedTracks.map((item, index) => (
+                <TrackCard
+                  key={index}
+                  id={item.track.id}
                   name={item.track.name}
                   image={item.track.album.images[0]?.url}
                   artists={item.track.artists.map((item) => item.name)}
+                  albumId={item.track.album.id}
+                  uri={item.track.uri}
                 />
               ))}
             </div>
@@ -47,12 +49,15 @@ const Home = () => {
               New albums & singles
             </h1>
             <div className="my-6 grid grid-cols-6 gap-6">
-              {newAlbumReleases.map((item) => (
-                <AlbumCard
-                  key={item.id}
+              {newAlbumReleases.map((item, index) => (
+                <TrackCard
+                  key={index}
                   name={item.name}
+                  id={item.id}
                   image={item.images[0]?.url}
                   artists={item.artists.map((item) => item.name)}
+                  albumId={item.id}
+                  uri={item.uri}
                 />
               ))}
             </div>

@@ -5,6 +5,8 @@ import {
   GET_CURRENT_PLAYING_TRACK_FAILED,
   GET_CURRENT_PLAYING_TRACK_START,
   GET_CURRENT_PLAYING_TRACK_SUCCESS,
+  SET_TRACK,
+  SetTrack,
 } from "../../types/track.actionTypes";
 
 class Actions {
@@ -37,6 +39,12 @@ class Actions {
           payload: error.data.error.message,
         });
       }
+    };
+  }
+
+  static setTrack(track: string) {
+    return async (dispatch: Dispatch<SetTrack>) => {
+      dispatch({ type: SET_TRACK, payload: track });
     };
   }
 }

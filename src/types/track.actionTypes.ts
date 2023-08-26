@@ -7,6 +7,20 @@ export const GET_CURRENT_PLAYING_TRACK_SUCCESS =
 export const GET_CURRENT_PLAYING_TRACK_FAILED =
   "GET_CURRENT_PLAYING_TRACK_FAILED";
 
+export const SET_TRACK = "SET_TRACK";
+
+export type TrackType = {
+  name: string;
+  id: string;
+  type: string;
+  uri: string;
+  duration_ms: number;
+  artists: ArtistType;
+  explicit: boolean;
+  track_number?: number;
+  disc_number?: number;
+};
+
 export type CurrentTrackType = {
   item: {
     name: string;
@@ -36,7 +50,13 @@ export interface CurrentlyPlayingTrackSuccess {
   payload: CurrentTrackType;
 }
 
+export interface SetTrack {
+  type: typeof SET_TRACK;
+  payload: string;
+}
+
 export type CurrentlyPlayingTrackDispatchTypes =
   | CurrentlyPlayingTrackStart
   | CurrentlyPlayingTrackFailed
-  | CurrentlyPlayingTrackSuccess;
+  | CurrentlyPlayingTrackSuccess
+  | SetTrack;
