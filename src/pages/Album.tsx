@@ -24,6 +24,7 @@ const Album = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state?.album.data);
+  const isLoading = useAppSelector((state) => state?.album.isLoading);
 
   const handleSetTrack = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -42,11 +43,16 @@ const Album = () => {
       className={`min-h-screen w-full rounded bg-gradient-to-t from-black ${getRandomColorFromArray()}`}
     >
       <section className="pt-20 pb-6 px-6 w-full flex flex-row items-end gap-6">
-        <img
-          src={data.images[0]?.url}
-          alt={data.name}
-          className="w-60 h-60 shadow-2xl"
-        />
+        {isLoading ? (
+          <div className="w-60 h-60 animate-pulse bg-cardHover"></div>
+        ) : (
+          <img
+            src={data.images[0]?.url}
+            alt={data.name}
+            className="w-60 h-60 shadow-2xl"
+          />
+        )}
+
         <div className="flex flex-col gap-3">
           <p className="capitalize text-sm">{data.albumType}</p>
           <h1 className="text-5xl font-bold drop-shadow-2xl">{data.name}</h1>
@@ -69,7 +75,7 @@ const Album = () => {
           </div>
         </div>
       </section>
-      <section className="p-6 min-h-screen bg-black/20">
+      <section className="p-6 min-h-screen bg-gradient-to-t from-card to-black/20">
         <div className="flex gap-6">
           <button
             onClick={(e) => handleSetTrack(e, data.uri)}

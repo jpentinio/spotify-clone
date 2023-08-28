@@ -57,7 +57,7 @@ const Playlist = () => {
             {data.type}
           </p>
           <h1 className="text-5xl font-bold drop-shadow-2xl">{data.name}</h1>
-          <div className="flex gap-1 items-center text-sm font-semibold">
+          <div className="flex gap-1 text-sm font-semibold">
             <div className="flex gap-2 items-center">
               <img
                 src={user?.images[0]?.url}
@@ -75,7 +75,7 @@ const Playlist = () => {
           </div>
         </div>
       </section>
-      <section className="p-6 min-h-screen bg-gradient-to-t from-black to-white/20">
+      <section className="p-6 min-h-screen bg-gradient-to-t from-card to-black/20">
         <div className="flex items-center gap-6">
           <button
             // onClick={(e) => handleSetTrack(e, data.uri)}
@@ -143,7 +143,7 @@ const Playlist = () => {
                                     onClick={() =>
                                       navigate(`/artist/${artist.id}`)
                                     }
-                                    className="cursor-pointer hover:underline"
+                                    className="cursor-pointer hover:underline hover:text-white"
                                   >
                                     {artist.name}
                                   </span>
@@ -153,7 +153,12 @@ const Playlist = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="text-sm text-artistColor font-semibold">
+                      <td
+                        onClick={() =>
+                          navigate(`/album/${item.track.album.id}`)
+                        }
+                        className="cursor-pointer text-sm text-artistColor font-semibold hover:underline hover:text-white"
+                      >
                         {item.track.album.name}
                       </td>
                       <td className="w-44 text-sm text-artistColor">

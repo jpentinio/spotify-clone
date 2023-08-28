@@ -3,6 +3,7 @@ import { FaPlay } from "react-icons/fa";
 import { TrackType } from "../types/track.actionTypes";
 
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 type TracksTableProps = {
   data: TrackType[];
@@ -10,6 +11,7 @@ type TracksTableProps = {
 };
 
 const TracksTable = ({ data, handleSetTrack }: TracksTableProps) => {
+  const navigate = useNavigate();
   const groupedData: { [disc_number: number]: TrackType[] } = {};
 
   data.forEach((item) => {
@@ -52,7 +54,17 @@ const TracksTable = ({ data, handleSetTrack }: TracksTableProps) => {
               <td className="py-2">
                 <p className="font-semibold">{track.name}</p>
                 <p className="text-artistColor text-sm">
-                  {track.artists.map((artist) => artist.name).join(", ")}
+                  {track.artists.map((artist, i) => (
+                    <span key={i}>
+                      {i > 0 && ", "}
+                      <span
+                        onClick={() => navigate(`/artist/${artist.id}`)}
+                        className="cursor-pointer hover:underline hover:text-white"
+                      >
+                        {artist.name}
+                      </span>
+                    </span>
+                  ))}
                 </p>
               </td>
               <td className="w-28 text-sm text-artistColor font-semibold">

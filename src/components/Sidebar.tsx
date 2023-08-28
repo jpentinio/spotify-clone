@@ -15,7 +15,9 @@ const Sidebar = () => {
   const playlists = useAppSelector(
     (state) => state?.playlist?.userPlaylist.data
   );
-
+  const isLoading = useAppSelector(
+    (state) => state?.playlist?.userPlaylist.isLoading
+  );
   useEffect(() => {
     if (user?.id) {
       dispatch(Actions.getUserPlaylist());
@@ -45,7 +47,11 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="bg-base rounded-lg flex flex-col gap-2 row-span-5 hover:overflow-y-auto group">
+      <div
+        className={`bg-base rounded-lg flex flex-col gap-2 row-span-5 ${
+          !isLoading && "hover:overflow-y-auto"
+        } group`}
+      >
         <div
           className={`p-4 cursor-pointer flex items-center gap-4 transition ease-linear delay-75 hover:text-white`}
           onClick={() => navigate("/")}
@@ -59,7 +65,22 @@ const Sidebar = () => {
           <Button text="Artists" />
         </div>
         <div className="p-2 flex flex-col">
-          {playlists.length > 0
+          {isLoading
+            ? [...Array(8)].map((i) => (
+                <div
+                  key={i}
+                  className="animate-pulse overflow-hidden p-3 flex flex-row gap-3 text-ellipsis cursor-pointer rounded-lg"
+                >
+                  <div className="bg-cardHover w-12 h-12 rounded-lg"></div>
+                  <div className="flex flex-col gap-4">
+                    <div className="bg-cardHover w-[230px] h-4 rounded-md"></div>
+                    <div className="bg-cardHover w-[130px] h-3 rounded-md">
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            : playlists.length > 0
             ? playlists.map((playlist) => (
                 <PlaylistCard
                   key={playlist.id}

@@ -1,3 +1,4 @@
+import { ArtistDetailsType, ArtistTopTracksType } from "./artist.actionTypes";
 import { ImageType } from "./home.actionTypes";
 
 export const CURRENT_USER_PROFILE = "USER_PROFILE";
@@ -7,6 +8,14 @@ export const CURRENT_USER_PROFILE_FAILED = "USER_PROFILE_FAILED";
 export const GET_USER_START = "GET_USER_START";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAILED = "GET_USER_FAILED";
+
+export const GET_USER_TOP_TRACKS_START = "GET_USER_TOP_TRACKS_START";
+export const GET_USER_TOP_TRACKS_SUCCESS = "GET_USER_TOP_TRACKS_SUCCESS";
+export const GET_USER_TOP_TRACKS_FAILED = "GET_USER_TOP_TRACKS_FAILED";
+
+export const GET_USER_TOP_ARTISTS_START = "GET_USER_TOP_ARTISTS_START";
+export const GET_USER_TOP_ARTISTS_SUCCESS = "GET_USER_TOP_ARTISTS_SUCCESS";
+export const GET_USER_TOP_ARTISTS_FAILED = "GET_USER_TOP_ARTISTS_FAILED";
 
 export const USER_LOGOUT = "USER_LOGOUT";
 
@@ -48,6 +57,40 @@ export interface GetUserSuccess {
   payload: UserProfileType;
 }
 
+//GET USER TOP TRACKS
+
+export interface GetUserTopTracksStart {
+  type: typeof GET_USER_TOP_TRACKS_START;
+}
+
+export interface GetUserTopTracksFailed {
+  type: typeof GET_USER_TOP_TRACKS_FAILED;
+  payload: string;
+}
+
+export interface GetUserTopTracksSuccess {
+  type: typeof GET_USER_TOP_TRACKS_SUCCESS;
+  payload: ArtistTopTracksType[];
+}
+
+//GET USER TOP ARTISTS
+
+export interface GetUserTopArtistsStart {
+  type: typeof GET_USER_TOP_ARTISTS_START;
+}
+
+export interface GetUserTopArtistsFailed {
+  type: typeof GET_USER_TOP_ARTISTS_FAILED;
+  payload: string;
+}
+
+export interface GetUserTopArtistsSuccess {
+  type: typeof GET_USER_TOP_ARTISTS_SUCCESS;
+  payload: ArtistDetailsType[];
+}
+
+// LOGOUT
+
 export interface UserLogout {
   type: typeof USER_LOGOUT;
 }
@@ -59,4 +102,10 @@ export type UserDispatchTypes =
   | GetUserStart
   | GetUserFailed
   | GetUserSuccess
+  | GetUserTopTracksStart
+  | GetUserTopTracksFailed
+  | GetUserTopTracksSuccess
+  | GetUserTopArtistsStart
+  | GetUserTopArtistsFailed
+  | GetUserTopArtistsSuccess
   | UserLogout;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import Actions from "../redux/artist/actions";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getRandomColorFromArray } from "./Album";
 import { FaPlay } from "react-icons/fa";
 import { SlOptions } from "react-icons/sl";
@@ -10,6 +10,7 @@ import moment from "moment";
 const Artist = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const data = useAppSelector((state) => state?.artist?.artistDetails.data);
   const tracks = useAppSelector((state) => state?.artist?.artistTopTracks.data);
 
@@ -18,7 +19,6 @@ const Artist = () => {
     dispatch(Actions.getArtistTopTracks(id!));
   }, []);
 
-  console.log(data.images[0]?.url);
   return (
     <div
       className={`min-h-screen w-full rounded bg-gradient-to-t from-black ${getRandomColorFromArray()}`}
@@ -37,7 +37,7 @@ const Artist = () => {
           {data.followers.total.toLocaleString() + " followers"}
         </p>
       </section>
-      <section className="p-6 min-h-screen bg-gradient-to-t from-black to-white/20">
+      <section className="p-6 min-h-screen bg-gradient-to-t from-card to-black/20">
         <div className="flex items-center gap-6">
           <button
             // onClick={(e) => handleSetTrack(e, data.uri)}
@@ -55,41 +55,48 @@ const Artist = () => {
 
         <div className="py-7">
           <h1 className="text-2xl font-bold">Popular</h1>
-          <div className="flex flex-col gap-4 my-4">
-            {tracks.length > 0
-              ? tracks.map((item, i) => (
-                  <div className="grid grid-cols-12 gap-6 items-center py-2 cursor-default rounded-lg group hover:bg-white/10">
-                    <div className="flex items-center justify-center text-artistColor text-sm">
-                      <FaPlay className="text-white hidden group-hover:flex" />
-                      <span className="flex text-center group-hover:hidden">
-                        {i + 1}
-                      </span>
-                    </div>
-                    <div className="col-span-5 flex items-center gap-4">
-                      <img
-                        src={item.album.images[0].url}
-                        alt={item.album.name}
-                        className="w-12 h-12"
-                      />
-                      <div className="flex flex-col gap-1">
-                        <p className="font-semibold">{item.name}</p>
-                        {item.explicit && (
-                          <div className="bg-white/40 h-5 w-5 text-[10px] flex items-center justify-center rounded-sm font-semibold text-black">
-                            E
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="col-span-5 text-sm text-artistColor">
-                      {item.album.name}
-                    </div>
-                    <div className="text-artistColor text-sm">
-                      {moment(item.duration_ms).format("m:ss")}
-                    </div>
-                  </div>
-                ))
-              : ""}
-          </div>
+          <table className="w-full table-fixed my-4">
+            <tbody>
+              {tracks.length > 0
+                ? tracks?.map((item, i) => (
+                    <tr key={i} className="group hover:bg-white/10">
+                      <td className="w-14">
+                        <div className="flex items-center justify-center">
+                          <FaPlay className="text-white hidden group-hover:flex" />
+                          <span className="flex text-center group-hover:hidden">
+                            {i + 1}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-2 flex items-center gap-4">
+                        <img
+                          src={item.album.images[0].url}
+                          alt={item.album.name}
+                          className="w-12 h-12"
+                        />
+                        <div className="flex flex-col gap-1">
+                          <p className="font-semibold">{item.name}</p>
+                          {item.explicit && (
+                            <div className="bg-white/40 h-5 w-5 text-[10px] flex items-center justify-center rounded-sm font-semibold text-black">
+                              E
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                      <td
+                        onClick={() => navigate(`/album/${item.album.id}`)}
+                        className="text-sm text-artistColor font-semibold cursor-pointer hover:underline hover:text-white"
+                      >
+                        {item.album.name}
+                      </td>
+                      <td className="w-28 text-sm text-artistColor font-semibold">
+                        {moment(item.duration_ms).format("m:ss")}
+                      </td>
+                    </tr>
+                  ))
+                : ""}
+            </tbody>
+          </table>
         </div>
       </section>
     </div>

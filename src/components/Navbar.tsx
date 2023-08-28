@@ -8,16 +8,25 @@ import { useNavigate } from "react-router-dom";
 const UserIconModal = ({
   open,
   logout,
+  userId,
 }: {
   open: boolean;
   logout: () => void;
+  userId: string;
 }) => {
+  const navigate = useNavigate();
   return (
     <div
-      className={`absolute w-[200px] bg-base p-4 right-8 top-20 text-sm rounded-lg shadow-lg ${
+      className={`flex flex-col gap-4 absolute w-[200px] bg-base p-4 right-8 top-16 text-sm rounded-lg shadow-lg ${
         !open && "hidden"
       }`}
     >
+      <div
+        onClick={() => navigate(`/user/${userId}`)}
+        className="cursor-pointer w-full"
+      >
+        Profile
+      </div>
       <div onClick={logout} className="cursor-pointer w-full">
         Log out
       </div>
@@ -69,7 +78,7 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
         content={user?.display_name}
         style={{ backgroundColor: "#121212", zIndex: 3 }}
       />
-      <UserIconModal open={open} logout={logout} />
+      <UserIconModal open={open} logout={logout} userId={user?.id || ""} />
     </div>
   );
 };

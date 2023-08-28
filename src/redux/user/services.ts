@@ -30,6 +30,40 @@ class Services {
       throw error.response;
     }
   }
+
+  static async getUserTopTracks() {
+    try {
+      let response = await axios.get(
+        `https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=short_term`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error: any) {
+      throw error.response;
+    }
+  }
+
+  static async getUserTopArtists() {
+    try {
+      let response = await axios.get(
+        `https://api.spotify.com/v1/me/top/artists?limit=6&time_range=short_term`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error: any) {
+      throw error.response;
+    }
+  }
 }
 
 export default Services;
