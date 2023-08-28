@@ -1,5 +1,5 @@
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
-import Actions from "../redux/userProfile/actions";
+import Actions from "../redux/user/actions";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { Tooltip } from "react-tooltip";
@@ -29,7 +29,7 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  const user = useAppSelector((state) => state?.userProfile?.data);
+  const user = useAppSelector((state) => state?.user?.currentUser.data);
 
   const logout = () => {
     dispatch(Actions.userLogout());
@@ -38,7 +38,7 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
 
   return (
     <div
-      className={`fixed z-10 px-6 py-2 bg-transparent flex justify-between items-center left-[330px] right-[18px] ${
+      className={`fixed z-20 px-6 py-2 bg-transparent flex justify-between items-center left-[330px] right-[18px] ${
         positionTop >= 100 ? "bg-zinc-800" : "bg-transparent"
       }`}
     >
@@ -66,7 +66,7 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
       </div>
       <Tooltip
         anchorSelect="#profileAnchor"
-        content={user?.displayName}
+        content={user?.display_name}
         style={{ backgroundColor: "#121212", zIndex: 3 }}
       />
       <UserIconModal open={open} logout={logout} />

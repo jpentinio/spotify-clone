@@ -58,20 +58,23 @@ const Artist = () => {
           <div className="flex flex-col gap-4 my-4">
             {tracks.length > 0
               ? tracks.map((item, i) => (
-                  <div className="grid grid-cols-12 gap-6 items-center">
-                    <div className="text-center text-artistColor text-sm">
-                      {i + 1}
+                  <div className="grid grid-cols-12 gap-6 items-center py-2 cursor-default rounded-lg group hover:bg-white/10">
+                    <div className="flex items-center justify-center text-artistColor text-sm">
+                      <FaPlay className="text-white hidden group-hover:flex" />
+                      <span className="flex text-center group-hover:hidden">
+                        {i + 1}
+                      </span>
                     </div>
                     <div className="col-span-5 flex items-center gap-4">
                       <img
                         src={item.album.images[0].url}
                         alt={item.album.name}
-                        className="w-10 h-10"
+                        className="w-12 h-12"
                       />
                       <div className="flex flex-col gap-1">
                         <p className="font-semibold">{item.name}</p>
                         {item.explicit && (
-                          <div className="bg-gray-400 h-5 w-5 text-[10px] flex items-center justify-center rounded-sm font-semibold text-black">
+                          <div className="bg-white/40 h-5 w-5 text-[10px] flex items-center justify-center rounded-sm font-semibold text-black">
                             E
                           </div>
                         )}

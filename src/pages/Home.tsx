@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import Actions from "../redux/userProfile/actions";
+import Actions from "../redux/user/actions";
 import HomeActions from "../redux/home/actions";
 import TrackCard from "../components/cards/TrackCard";
 

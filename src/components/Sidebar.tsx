@@ -3,7 +3,7 @@ import { VscLibrary } from "react-icons/vsc";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { useEffect } from "react";
-import Actions from "../redux/userPlaylist/actions";
+import Actions from "../redux/playlist/actions";
 import PlaylistCard from "./cards/PlaylistCard";
 import Button from "./Button";
 
@@ -11,8 +11,10 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state?.userProfile?.data);
-  const playlists = useAppSelector((state) => state?.userPlaylist?.data);
+  const user = useAppSelector((state) => state?.user?.currentUser?.data);
+  const playlists = useAppSelector(
+    (state) => state?.playlist?.userPlaylist.data
+  );
 
   useEffect(() => {
     if (user?.id) {
@@ -65,6 +67,7 @@ const Sidebar = () => {
                   image={playlist.images[0]?.url}
                   type={playlist.type}
                   owner={playlist.owner.display_name}
+                  id={playlist.id}
                 />
               ))
             : ""}

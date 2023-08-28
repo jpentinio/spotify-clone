@@ -1,3 +1,4 @@
+import { AlbumType } from "./album.actionTypes";
 import { ArtistType, ImageType } from "./home.actionTypes";
 
 export const GET_CURRENT_PLAYING_TRACK_START =
@@ -19,6 +20,7 @@ export type TrackType = {
   explicit: boolean;
   track_number?: number;
   disc_number?: number;
+  album: AlbumType;
 };
 
 export type CurrentTrackType = {
