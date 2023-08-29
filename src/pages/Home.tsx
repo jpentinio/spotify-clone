@@ -48,7 +48,6 @@ const Home = () => {
               ? recentlyPlayedTracks.map((item, index) => (
                   <TrackCard
                     key={index}
-                    id={item.track.id}
                     name={item.track.name}
                     image={item.track.album.images[0]?.url}
                     artists={item.track.artists.map((item) => item)}
@@ -83,7 +82,6 @@ const Home = () => {
                   <TrackCard
                     key={index}
                     name={item.name}
-                    id={item.id}
                     image={item.images[0]?.url}
                     artists={item.artists.map((item) => item)}
                     albumId={item.id}
