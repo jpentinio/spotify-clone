@@ -2,7 +2,6 @@ import {
   ArtistDetailsType,
   ArtistTopTracksType,
 } from "../../types/artist.actionTypes";
-import { TrackType } from "../../types/track.actionTypes";
 import {
   CURRENT_USER_PROFILE,
   CURRENT_USER_PROFILE_FAILED,

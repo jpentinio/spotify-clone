@@ -1,22 +1,12 @@
 import logo from "../assets/spotify-white.png";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Login = () => {
-  const navigate = useNavigate();
   const authEndpoint = import.meta.env.VITE_SPOTIFY_AUTH_ENDPOINT;
   const redirectUri = import.meta.env.VITE_REDIRECT_URI;
   const responseType = import.meta.env.VITE_SPOTIFY_RESPONSE_TYPE;
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
   const scope = import.meta.env.VITE_SPOTIFY_SCOPE;
-  const accessToken = localStorage.getItem("access_token");
-
-  // useEffect(() => {
-  //   if (accessToken) {
-  //     navigate("/");
-  //   }
-  // }, []);
 
   return (
     <div className="h-screen bg-gradient-to-t from-black to-zinc-800">

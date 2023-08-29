@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import Actions from "../redux/user/actions";
 import { useNavigate, useParams } from "react-router-dom";
@@ -68,7 +68,6 @@ const User = () => {
                     image={artist.images[0]?.url}
                     type={artist.type}
                     id={artist.id}
-                    uri={artist.uri}
                   />
                 ))
               : ""}

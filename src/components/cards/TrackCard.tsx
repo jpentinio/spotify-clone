@@ -6,14 +6,12 @@ import { ArtistType } from "../../types/home.actionTypes";
 
 const TrackCard = ({
   name,
-  id,
   image,
   artists,
   albumId,
   uri,
 }: {
   name: string;
-  id: string;
   image: string;
   artists: ArtistType;
   albumId: string;

@@ -8,9 +8,6 @@ import SpotifyPlayer from "react-spotify-web-playback";
 const BottomNavigation = () => {
   const dispatch = useAppDispatch();
   const [play, setPlay] = useState(false);
-  const currentPlayingTrack = useAppSelector(
-    (state) => state?.track?.currentPlayingTrack.data
-  );
   const selectedTrack = useAppSelector((state) => state?.track.selectedTrack);
 
   useEffect(() => {

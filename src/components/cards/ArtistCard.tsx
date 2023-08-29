@@ -5,10 +5,9 @@ type Props = {
   image: string;
   id: string;
   type: string;
-  uri: string;
 };
 
-const ArtistCard = ({ name, image, id, type, uri }: Props) => {
+const ArtistCard = ({ name, image, id, type }: Props) => {
   const navigate = useNavigate();
   return (
     <div
