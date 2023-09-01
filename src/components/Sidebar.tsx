@@ -124,7 +124,7 @@ const Sidebar = () => {
         <div className="p-2 flex flex-col">
           {selected === "Playlists"
             ? playlistsIsLoading
-              ? [...Array(playlists.length)].map((i) => <LoadingCard />)
+              ? [...Array(playlists.length)].map(() => <LoadingCard />)
               : playlists.length > 0
               ? playlists.map((playlist) => (
                   <PlaylistCard
@@ -140,7 +140,7 @@ const Sidebar = () => {
             : ""}
           {selected === "Albums"
             ? albumsIsLoading
-              ? [...Array(albums.length)].map((i) => <LoadingCard />)
+              ? [...Array(albums.length)].map(() => <LoadingCard />)
               : albums.length > 0
               ? albums.map((item) => (
                   <AlbumCard
@@ -154,14 +154,13 @@ const Sidebar = () => {
             : ""}
           {selected === "Artists"
             ? artistsIsLoading
-              ? [...Array(artists.length)].map((i) => <LoadingCard />)
+              ? [...Array(artists.length)].map(() => <LoadingCard />)
               : artists.length > 0
               ? artists.map((item) => (
                   <ArtistMiniCard
                     name={item.name}
                     image={item.images[0].url}
                     id={item.id}
-                    type={item.type}
                   />
                 ))
               : ""

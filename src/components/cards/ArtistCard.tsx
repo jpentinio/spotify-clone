@@ -31,7 +31,15 @@ export const ArtistCard = ({ name, image, id, type }: Props) => {
   );
 };
 
-export const ArtistMiniCard = ({ name, image, id, type }: Props) => {
+export const ArtistMiniCard = ({
+  name,
+  image,
+  id,
+}: {
+  name: string;
+  image: string;
+  id: string;
+}) => {
   const navigate = useNavigate();
   return (
     <div
