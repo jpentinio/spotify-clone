@@ -1,5 +1,5 @@
 const Search = () => {
-  return <div>Search</div>;
+  return <div className="min-h-screen w-full bg-base"></div>;
 };
 
 export default Search;

@@ -12,6 +12,8 @@ export const sidebarItems = [
   },
 ];
 
+export const sidebarLibraryItems = ["Playlists", "Albums", "Artists"];
+
 export const albumColors = [
   "to-slate-800",
   "to-gray-800",

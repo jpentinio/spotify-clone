@@ -23,8 +23,8 @@ const Album = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state?.album.data);
-  const isLoading = useAppSelector((state) => state?.album.isLoading);
+  const data = useAppSelector((state) => state?.album.album.data);
+  const isLoading = useAppSelector((state) => state?.album.album.isLoading);
 
   const handleSetTrack = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -36,7 +36,7 @@ const Album = () => {
 
   useEffect(() => {
     dispatch(Actions.getAlbum(id!));
-  }, []);
+  }, [id]);
 
   return (
     <div

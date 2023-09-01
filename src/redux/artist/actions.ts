@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import Services from "./services";
 import {
   ArtistDetailsDispatchTypes,
+  ArtistDetailsType,
   ArtistTopTracksDispatchTypes,
   ArtistTopTracksType,
   GET_ARTIST_DETAILS_FAILED,
@@ -10,6 +11,10 @@ import {
   GET_ARTIST_TOP_TRACKS_FAILED,
   GET_ARTIST_TOP_TRACKS_START,
   GET_ARTIST_TOP_TRACKS_SUCCESS,
+  GET_USER_ARTIST_FAILED,
+  GET_USER_ARTIST_START,
+  GET_USER_ARTIST_SUCCESS,
+  UserSavedArtistsDispatchTypes,
 } from "../../types/artist.actionTypes";
 
 class Actions {
@@ -68,6 +73,34 @@ class Actions {
       } catch (error: any) {
         dispatch({
           type: GET_ARTIST_TOP_TRACKS_FAILED,
+          payload: error.data.error.message,
+        });
+      }
+    };
+  }
+
+  static getUserArtist() {
+    return async (dispatch: Dispatch<UserSavedArtistsDispatchTypes>) => {
+      try {
+        dispatch({ type: GET_USER_ARTIST_START });
+        let response = await Services.getUserArtist();
+        dispatch({
+          type: GET_USER_ARTIST_SUCCESS,
+          payload: response.data.artists.items.map(
+            (item: ArtistDetailsType) => {
+              return {
+                name: item.name,
+                id: item.id,
+                type: item.type,
+                images: item.images,
+              };
+            }
+          ),
+        });
+        return response;
+      } catch (error: any) {
+        dispatch({
+          type: GET_USER_ARTIST_FAILED,
           payload: error.data.error.message,
         });
       }

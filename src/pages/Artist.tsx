@@ -17,7 +17,7 @@ const Artist = () => {
   useEffect(() => {
     dispatch(Actions.getArtistDetails(id!));
     dispatch(Actions.getArtistTopTracks(id!));
-  }, []);
+  }, [id]);
 
   return (
     <div

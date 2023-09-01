@@ -9,6 +9,10 @@ import {
   GET_ARTIST_TOP_TRACKS_FAILED,
   GET_ARTIST_TOP_TRACKS_START,
   GET_ARTIST_TOP_TRACKS_SUCCESS,
+  GET_USER_ARTIST_FAILED,
+  GET_USER_ARTIST_START,
+  GET_USER_ARTIST_SUCCESS,
+  UserSavedArtistsDispatchTypes,
 } from "../../types/artist.actionTypes";
 
 interface ArtistDetailsStateType {
@@ -27,7 +31,16 @@ interface ArtistTopTracksStateType {
   };
 }
 
-type ArtistStateTypes = ArtistDetailsStateType & ArtistTopTracksStateType;
+interface UserSavedArtistsStateType {
+  userArtist: {
+    data: ArtistDetailsType[];
+    isLoading: boolean;
+    error: string;
+  };
+}
+type ArtistStateTypes = ArtistDetailsStateType &
+  ArtistTopTracksStateType &
+  UserSavedArtistsStateType;
 
 const initialState = {
   artistDetails: {
@@ -51,9 +64,17 @@ const initialState = {
     isLoading: false,
     error: "",
   },
+  userArtist: {
+    data: [],
+    isLoading: false,
+    error: "",
+  },
 };
 
-type DispatchTypes = ArtistDetailsDispatchTypes | ArtistTopTracksDispatchTypes;
+type DispatchTypes =
+  | ArtistDetailsDispatchTypes
+  | ArtistTopTracksDispatchTypes
+  | UserSavedArtistsDispatchTypes;
 
 export const artistDetailsReducer = (
   state: ArtistStateTypes = initialState,
@@ -114,6 +135,36 @@ export const artistDetailsReducer = (
         ...state,
         artistTopTracks: {
           ...state.artistTopTracks,
+          isLoading: false,
+          error: action.payload,
+        },
+      };
+    }
+    //USER SAVED ARTISTS
+    case GET_USER_ARTIST_START:
+      return {
+        ...state,
+        userArtist: {
+          ...state.userArtist,
+          isLoading: true,
+          error: "",
+        },
+      };
+    case GET_USER_ARTIST_SUCCESS:
+      return {
+        ...state,
+        userArtist: {
+          ...state.userArtist,
+          data: action.payload,
+          isLoading: false,
+          error: "",
+        },
+      };
+    case GET_USER_ARTIST_FAILED: {
+      return {
+        ...state,
+        userArtist: {
+          ...state.userArtist,
           isLoading: false,
           error: action.payload,
         },

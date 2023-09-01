@@ -1,4 +1,4 @@
-import { GoChevronLeft, GoChevronRight } from "react-icons/go";
+import { GoChevronLeft, GoChevronRight, GoSearch } from "react-icons/go";
 import Actions from "../redux/user/actions";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -34,6 +34,19 @@ const UserIconModal = ({
   );
 };
 
+const Searchfield = () => {
+  return (
+    <div className="w-[380px] relative flex bg-cardHover rounded-full px-4 py-3 items-center gap-3 focus-within:outline focus-within:outline-[2px] focus-within:outline-white">
+      <GoSearch className="w-5 h-5" />
+      <input
+        type="search"
+        placeholder="What do you want to listen to?"
+        className="w-full bg-inherit text-sm placeholder-artistColor/50 focus:outline-none"
+      />
+    </div>
+  );
+};
+
 const Navbar = ({ positionTop }: { positionTop: number }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -61,6 +74,8 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
         <button className="bg-black w-8 h-8 rounded-full flex items-center justify-center">
           <GoChevronRight className="w-5 h-5" />
         </button>
+
+        <Searchfield />
       </div>
       <div
         id="profileAnchor"

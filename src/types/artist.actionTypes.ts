@@ -8,6 +8,10 @@ export const GET_ARTIST_TOP_TRACKS_START = "GET_ARTIST_TOP_TRACKS_START";
 export const GET_ARTIST_TOP_TRACKS_SUCCESS = "GET_ARTIST_TOP_TRACKS_SUCCESS";
 export const GET_ARTIST_TOP_TRACKS_FAILED = "GET_ARTIST_TOP_TRACKS_FAILED";
 
+export const GET_USER_ARTIST_START = "GET_USER_ARTIST_START";
+export const GET_USER_ARTIST_SUCCESS = "GET_USER_ARTIST_SUCCESS";
+export const GET_USER_ARTIST_FAILED = "GET_USER_ARTIST_FAILED";
+
 export type ArtistDetailsType = {
   name: string;
   type: string;
@@ -69,6 +73,22 @@ export interface GetArtistTopTracksSuccess {
   payload: ArtistTopTracksType[];
 }
 
+// GET USER SAVED ARTISTS
+
+export interface GetUserArtistStart {
+  type: typeof GET_USER_ARTIST_START;
+}
+
+export interface GetUserArtistFailed {
+  type: typeof GET_USER_ARTIST_FAILED;
+  payload: string;
+}
+
+export interface GetUserArtistSuccess {
+  type: typeof GET_USER_ARTIST_SUCCESS;
+  payload: ArtistDetailsType[];
+}
+
 export type ArtistDetailsDispatchTypes =
   | GetArtistDetailsStart
   | GetArtistDetailsFailed
@@ -78,3 +98,8 @@ export type ArtistTopTracksDispatchTypes =
   | GetArtistTopTracksStart
   | GetArtistTopTracksFailed
   | GetArtistTopTracksSuccess;
+
+export type UserSavedArtistsDispatchTypes =
+  | GetUserArtistStart
+  | GetUserArtistFailed
+  | GetUserArtistSuccess;

@@ -4,7 +4,11 @@ import {
   GET_ALBUM_FAILED,
   GET_ALBUM_START,
   GET_ALBUM_SUCCESS,
+  GET_USER_ALBUM_FAILED,
+  GET_USER_ALBUM_START,
+  GET_USER_ALBUM_SUCCESS,
   GetAlbumDispatchTypes,
+  UserSavedAlbumType,
 } from "../../types/album.actionTypes";
 import { TrackType } from "../../types/track.actionTypes";
 
@@ -48,6 +52,30 @@ class Actions {
       } catch (error: any) {
         dispatch({
           type: GET_ALBUM_FAILED,
+          payload: error.data.error.message,
+        });
+      }
+    };
+  }
+
+  static getUserAlbum() {
+    return async (dispatch: Dispatch<GetAlbumDispatchTypes>) => {
+      try {
+        dispatch({ type: GET_USER_ALBUM_START });
+        let response = await Services.getUserAlbum();
+        dispatch({
+          type: GET_USER_ALBUM_SUCCESS,
+          payload: response.data.items.map((item: UserSavedAlbumType) => {
+            return {
+              added_at: item.added_at,
+              album: item.album,
+            };
+          }),
+        });
+        return response;
+      } catch (error: any) {
+        dispatch({
+          type: GET_USER_ALBUM_FAILED,
           payload: error.data.error.message,
         });
       }

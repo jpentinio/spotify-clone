@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getRandomColorFromArray } from "./Album";
 import moment from "moment";
 import { FaPlay } from "react-icons/fa";
-import ArtistCard from "../components/cards/ArtistCard";
+import { ArtistCard } from "../components/cards/ArtistCard";
 
 const User = () => {
   const { id } = useParams<{ id: string }>();

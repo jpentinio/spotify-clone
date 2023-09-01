@@ -7,7 +7,7 @@ type Props = {
   type: string;
 };
 
-const ArtistCard = ({ name, image, id, type }: Props) => {
+export const ArtistCard = ({ name, image, id, type }: Props) => {
   const navigate = useNavigate();
   return (
     <div
@@ -31,4 +31,23 @@ const ArtistCard = ({ name, image, id, type }: Props) => {
   );
 };
 
-export default ArtistCard;
+export const ArtistMiniCard = ({ name, image, id, type }: Props) => {
+  const navigate = useNavigate();
+  return (
+    <div
+      onClick={() => navigate(`/artist/${id}`)}
+      className="overflow-hidden p-3 flex flex-row gap-3 text-ellipsis cursor-pointer hover:bg-card rounded-lg"
+    >
+      <img
+        src={image}
+        alt={name}
+        className="w-12 h-12 rounded-full object-cover"
+      />
+      <div className="flex flex-col justify-center gap-2">
+        <div className="text-white font-semibold truncate w-[230px]">
+          {name}
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -32,9 +32,9 @@ const Home = () => {
           </h1>
           <div className="my-6 grid grid-cols-6 gap-6">
             {recentlyPlayedTracksLoading
-              ? [...Array(11)].map((i) => (
+              ? [...Array(11)].map((i, index) => (
                   <div
-                    key={i}
+                    key={index}
                     className="bg-card p-5 flex flex-col gap-4 rounded-lg shadow-lg"
                   >
                     <div className="animate-pulse bg-cardHover w-full h-48 rounded-md"></div>

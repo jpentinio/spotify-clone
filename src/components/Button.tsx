@@ -1,6 +1,10 @@
-const Button = ({ text }: { text: string }) => {
+const Button = ({ text, selected }: { text: string; selected: string }) => {
   return (
-    <button className="bg-cardHover px-3 py-2 text-white rounded-full text-sm font-semibold">
+    <button
+      className={`${
+        selected === text ? "bg-white text-black" : "bg-cardHover text-white"
+      } px-3 py-2  rounded-full text-sm font-semibold`}
+    >
       {text}
     </button>
   );

@@ -37,20 +37,24 @@ export function PrivateRoutes() {
 
   useEffect(() => {
     dispatch(Actions.getCurrentUserProfile(accessToken));
-    const handleScroll = () => {
-      const el: any = myElementRef.current;
-      setPositionTop(el.scrollTop);
-    };
+    if (accessToken) {
+      const handleScroll = () => {
+        const el: any = myElementRef.current;
+        setPositionTop(el.scrollTop);
+      };
 
-    const element: any = myElementRef.current;
-    element.addEventListener("scroll", handleScroll);
+      const element: any = myElementRef.current;
+      element.addEventListener("scroll", handleScroll);
 
-    return () => {
-      element.removeEventListener("scroll", handleScroll);
-    };
+      return () => {
+        element.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, []);
 
-  return accessToken === null || user?.error === "The access token expired" ? (
+  console.log(accessToken);
+
+  return accessToken === "" || user?.error === "The access token expired" ? (
     <Navigate to="/login" />
   ) : (
     <div className="flex flex-row gap-2 bg-black p-2 max-h-[93vh] overflow-hidden">
