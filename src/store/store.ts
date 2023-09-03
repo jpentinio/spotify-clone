@@ -5,6 +5,7 @@ import { homeReducer } from "../redux/home/reducers";
 import { trackReducer } from "../redux/track/reducers";
 import { albumReducer } from "../redux/album/reducers";
 import { artistDetailsReducer } from "../redux/artist/reducers";
+import { searchReducer } from "../redux/search/reducers";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     track: trackReducer,
     album: albumReducer,
     artist: artistDetailsReducer,
+    search: searchReducer,
   },
 });
 

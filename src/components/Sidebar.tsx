@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import PlaylistActions from "../redux/playlist/actions";
 import AlbumActions from "../redux/album/actions";
 import ArtistActions from "../redux/artist/actions";
-import PlaylistCard from "./cards/PlaylistCard";
+import { PlaylistMiniCard } from "./cards/PlaylistCard";
 import Button from "./Button";
 import { sidebarLibraryItems } from "../constants";
 import AlbumCard from "./cards/AlbumCard";
@@ -127,7 +127,7 @@ const Sidebar = () => {
               ? [...Array(playlists.length)].map(() => <LoadingCard />)
               : playlists.length > 0
               ? playlists.map((playlist) => (
-                  <PlaylistCard
+                  <PlaylistMiniCard
                     key={playlist.id}
                     name={playlist.name}
                     image={playlist.images[0]?.url}

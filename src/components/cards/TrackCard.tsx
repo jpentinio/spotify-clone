@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../hooks";
 import Actions from "../../redux/track/actions";
 import { ArtistType } from "../../types/home.actionTypes";
 
-const TrackCard = ({
+export const TrackCard = ({
   name,
   image,
   artists,
@@ -35,7 +35,7 @@ const TrackCard = ({
         <img
           src={image}
           alt={name}
-          className="w-full h-50 object-cover rounded-lg"
+          className="w-48 h-48 object-cover rounded-lg"
         />
         <button
           onClick={handleSetTrack}
@@ -66,5 +66,3 @@ const TrackCard = ({
     </div>
   );
 };
-
-export default TrackCard;

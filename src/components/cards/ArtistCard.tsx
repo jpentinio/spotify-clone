@@ -18,7 +18,7 @@ export const ArtistCard = ({ name, image, id, type }: Props) => {
         <img
           src={image}
           alt={name}
-          className="w-full h-50 object-cover rounded-full"
+          className="object-cover rounded-full w-48 h-48"
         />
       </div>
       <div className="flex flex-col gap-2">

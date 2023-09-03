@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import HomeActions from "../redux/home/actions";
-import TrackCard from "../components/cards/TrackCard";
+import { TrackCard } from "../components/cards/TrackCard";
 
 const Home = () => {
   const dispatch = useAppDispatch();

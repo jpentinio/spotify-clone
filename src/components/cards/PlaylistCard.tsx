@@ -1,7 +1,44 @@
 import { LuMusic4 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
-const PlaylistCard = ({
+export const PlaylistCard = ({
+  name,
+  image,
+  owner,
+  id,
+  uri,
+}: {
+  name: string;
+  image: string;
+  owner: string;
+  id: string;
+  uri: string;
+}) => {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      onClick={() => navigate(`/playlist/${id}`)}
+      className="group bg-card p-5 flex flex-col gap-4 rounded-lg cursor-pointer transition ease-in-out delay-75 drop-shadow-xl hover:bg-cardHover "
+    >
+      <div className="relative">
+        <img
+          src={image}
+          alt={name}
+          className="w-48 h-48 object-cover rounded-lg"
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="font-bold truncate text-md">{name}</div>
+        <div className="text-sm text-artistColor capitalize font-semibold">
+          By {owner}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const PlaylistMiniCard = ({
   name,
   image,
   type,
@@ -45,5 +82,3 @@ const PlaylistCard = ({
     </div>
   );
 };
-
-export default PlaylistCard;

@@ -16,7 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoutes />}>
           <Route element={<Home />} path="/" />
-          <Route element={<Search />} path="/search" />
+          <Route element={<Search />} path="/search/*" />
           <Route element={<Album />} path="/album/:id" />
           <Route element={<Artist />} path="/artist/:id" />
           <Route element={<Playlist />} path="/playlist/:id" />
