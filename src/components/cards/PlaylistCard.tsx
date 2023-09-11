@@ -1,5 +1,8 @@
+import { FaPlay } from "react-icons/fa";
 import { LuMusic4 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import { createHandleSetTrack } from "../../utils/utils";
+import { useAppDispatch } from "../../hooks";
 
 export const PlaylistCard = ({
   name,
@@ -15,7 +18,9 @@ export const PlaylistCard = ({
   uri: string;
 }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
+  const handleSetTrack = createHandleSetTrack(dispatch);
   return (
     <div
       onClick={() => navigate(`/playlist/${id}`)}
@@ -27,10 +32,16 @@ export const PlaylistCard = ({
           alt={name}
           className="w-48 h-48 object-cover rounded-lg"
         />
+        <button
+          onClick={handleSetTrack(uri)}
+          className="bg-primaryGreen p-3 w-fit rounded-full shadow-xl absolute bottom-2 right-2 hidden z-10 group-hover:flex"
+        >
+          <FaPlay className="text-base" />
+        </button>
       </div>
       <div className="flex flex-col gap-2">
         <div className="font-bold truncate text-md">{name}</div>
-        <div className="text-sm text-artistColor capitalize font-semibold">
+        <div className="text-sm text-artistColor truncate capitalize font-semibold">
           By {owner}
         </div>
       </div>

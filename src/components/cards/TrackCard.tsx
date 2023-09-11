@@ -1,8 +1,8 @@
-import { FaPlay } from "react-icons/fa";
+import { FaPause, FaPlay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks";
-import Actions from "../../redux/track/actions";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { ArtistType } from "../../types/home.actionTypes";
+import { createHandleSetTrack, setPlaybackState } from "../../utils/utils";
 
 export const TrackCard = ({
   name,
@@ -19,12 +19,12 @@ export const TrackCard = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const handleSetTrack = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(Actions.setTrack(uri));
-  };
+  const selectedTrack = useAppSelector((state) => state.track.selectedTrack);
+  const spotifyCallBack = useAppSelector(
+    (state) => state.track.spotifyCallback
+  );
+  const handleSetTrack = createHandleSetTrack(dispatch);
+  const handleSetPlaybackState = setPlaybackState(dispatch);
 
   return (
     <div
@@ -35,14 +35,28 @@ export const TrackCard = ({
         <img
           src={image}
           alt={name}
+          loading="lazy"
           className="w-48 h-48 object-cover rounded-lg"
         />
-        <button
-          onClick={handleSetTrack}
-          className="bg-primaryGreen p-3 w-fit rounded-full shadow-xl absolute bottom-2 right-2 hidden z-10 group-hover:flex"
-        >
-          <FaPlay className="text-base" />
-        </button>
+        {spotifyCallBack.track.uri === uri && spotifyCallBack.isPlaying ? (
+          <button
+            onClick={handleSetPlaybackState("pause")}
+            className="bg-primaryGreen p-3 w-fit rounded-full shadow-xl absolute bottom-2 right-2 hidden z-10 group-hover:flex"
+          >
+            <FaPause className="text-base" />
+          </button>
+        ) : (
+          <button
+            onClick={
+              !selectedTrack || uri !== spotifyCallBack.track.uri
+                ? handleSetTrack(uri)
+                : handleSetPlaybackState("play")
+            }
+            className="bg-primaryGreen p-3 w-fit rounded-full shadow-xl absolute bottom-2 right-2 hidden z-10 group-hover:flex"
+          >
+            <FaPlay className="text-base" />
+          </button>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <div className="font-bold truncate text-md">{name}</div>
@@ -62,6 +76,18 @@ export const TrackCard = ({
             </span>
           ))}
         </div>
+      </div>
+    </div>
+  );
+};
+
+export const TrackCardLoading = () => {
+  return (
+    <div className="bg-card p-5 flex flex-col gap-4 rounded-lg shadow-lg">
+      <div className="animate-pulse bg-cardHover w-full h-48 rounded-md"></div>
+      <div className="animate-pulse flex flex-col gap-2">
+        <div className="bg-cardHover w-full h-6 rounded-md"></div>
+        <div className="bg-cardHover w-24 h-4 rounded-md"></div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import Services from "./services";
 import {
+  ColorType,
   GET_NEW_ALBUM_RELEASES_FAILED,
   GET_NEW_ALBUM_RELEASES_START,
   GET_NEW_ALBUM_RELEASES_SUCCESS,
@@ -11,7 +12,10 @@ import {
   NewAlbumReleasesType,
   RecentlyPlayedTracksDispatchTypes,
   RecentlyPlayedTracksType,
+  SET_COLOR_THEME,
+  SetColorTheme,
 } from "../../types/home.actionTypes";
+import { checkTokenIfExpired } from "../../utils/utils";
 
 class Actions {
   static getRecentlyPlayedTracks() {
@@ -36,9 +40,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_RECENTLY_PLAYED_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };
@@ -65,11 +70,18 @@ class Actions {
         });
         return response;
       } catch (error: any) {
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_NEW_ALBUM_RELEASES_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
+    };
+  }
+
+  static setColorTheme(value: ColorType) {
+    return async (dispatch: Dispatch<SetColorTheme>) => {
+      dispatch({ type: SET_COLOR_THEME, payload: value });
     };
   }
 }

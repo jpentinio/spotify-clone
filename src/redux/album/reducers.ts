@@ -9,17 +9,19 @@ import {
   GetAlbumDispatchTypes,
   UserSavedAlbumType,
 } from "../../types/album.actionTypes";
+import { ErrorType } from "../../types/userProfile.actionTypes";
+import { errorInitialState } from "../user/reducers";
 
 interface AlbumStateTypes {
   userAlbum: {
     data: UserSavedAlbumType[];
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
   album: {
     data: AlbumType;
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
 }
 
@@ -27,7 +29,7 @@ const initialState = {
   userAlbum: {
     data: [],
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
   album: {
     data: {
@@ -46,7 +48,7 @@ const initialState = {
       },
     },
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
 };
 
@@ -61,7 +63,6 @@ export const albumReducer = (
         album: {
           ...state.album,
           isLoading: true,
-          error: "",
         },
       };
     case GET_ALBUM_SUCCESS:
@@ -71,7 +72,6 @@ export const albumReducer = (
           ...state.album,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     case GET_ALBUM_FAILED: {
@@ -91,7 +91,6 @@ export const albumReducer = (
         userAlbum: {
           ...state.userAlbum,
           isLoading: true,
-          error: "",
         },
       };
     case GET_USER_ALBUM_SUCCESS:
@@ -101,7 +100,6 @@ export const albumReducer = (
           ...state.userAlbum,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     case GET_USER_ALBUM_FAILED: {

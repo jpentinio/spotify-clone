@@ -5,8 +5,13 @@ import {
   GET_CURRENT_PLAYING_TRACK_FAILED,
   GET_CURRENT_PLAYING_TRACK_START,
   GET_CURRENT_PLAYING_TRACK_SUCCESS,
+  SET_PLAYBACK_STATE,
+  SET_SPOTIFY_CALLBACK,
   SET_TRACK,
+  SetPlaybackState,
+  SetSpotifyCallback,
   SetTrack,
+  SpotifyCallbackType,
 } from "../../types/track.actionTypes";
 
 class Actions {
@@ -45,6 +50,19 @@ class Actions {
   static setTrack(track: string) {
     return async (dispatch: Dispatch<SetTrack>) => {
       dispatch({ type: SET_TRACK, payload: track });
+    };
+  }
+
+  static setSpotifyCallback(value: SpotifyCallbackType) {
+    return async (dispatch: Dispatch<SetSpotifyCallback>) => {
+      dispatch({ type: SET_SPOTIFY_CALLBACK, payload: value });
+    };
+  }
+
+  static setPlaybackState(value: string) {
+    return async (dispatch: Dispatch<SetPlaybackState>) => {
+      await Services.setPlaybackState(value);
+      dispatch({ type: SET_PLAYBACK_STATE });
     };
   }
 }

@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import Actions from "../redux/user/actions";
 import { useNavigate, useParams } from "react-router-dom";
-import { getRandomColorFromArray } from "./Album";
 import moment from "moment";
 import { FaPlay } from "react-icons/fa";
 import { ArtistCard } from "../components/cards/ArtistCard";
+import { createHandleSetTrack, getRandomColorFromArray } from "../utils/utils";
 
 const User = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,8 +18,11 @@ const User = () => {
     useAppSelector((state) => state?.user?.userTopTracks.data) || [];
   const topArtists =
     useAppSelector((state) => state?.user?.userTopArtists.data) || [];
+  const theme = useAppSelector((state) => state?.home?.theme);
 
   const data = currentUser || user;
+
+  const handleSetTrack = createHandleSetTrack(dispatch);
 
   useEffect(() => {
     if (user?.id === currentUser?.id) {
@@ -33,7 +36,7 @@ const User = () => {
 
   return (
     <div
-      className={`min-h-screen w-full bg-gradient-to-t from-black ${getRandomColorFromArray()}`}
+      className={`min-h-screen w-full bg-gradient-to-t from-black ${theme.gradient}`}
     >
       <section className="pt-20 pb-6 px-6 w-full flex flex-row items-end gap-6">
         <img
@@ -68,6 +71,7 @@ const User = () => {
                     image={artist.images[0]?.url}
                     type={artist.type}
                     id={artist.id}
+                    uri={artist.uri}
                   />
                 ))
               : ""}
@@ -85,7 +89,10 @@ const User = () => {
                     <tr key={i} className="group hover:bg-white/10">
                       <td className="w-14">
                         <div className="flex items-center justify-center">
-                          <FaPlay className="text-white hidden group-hover:flex" />
+                          <FaPlay
+                            onClick={handleSetTrack(item.uri)}
+                            className="text-white hidden group-hover:flex"
+                          />
                           <span className="flex text-center group-hover:hidden">
                             {i + 1}
                           </span>

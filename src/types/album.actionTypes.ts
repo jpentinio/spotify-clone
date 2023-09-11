@@ -1,5 +1,6 @@
 import { ArtistType, ImageType } from "./home.actionTypes";
 import { TrackType } from "./track.actionTypes";
+import { ErrorType } from "./userProfile.actionTypes";
 
 export const GET_ALBUM_START = "GET_ALBUM_START";
 export const GET_ALBUM_SUCCESS = "GET_ALBUM_SUCCESS";
@@ -38,7 +39,7 @@ export interface GetAlbumStart {
 
 export interface GetAlbumFailed {
   type: typeof GET_ALBUM_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface GetAlbumSuccess {
@@ -54,7 +55,7 @@ export interface GetUserAlbumStart {
 
 export interface GetUserAlbumFailed {
   type: typeof GET_USER_ALBUM_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface GetUserAlbumSuccess {

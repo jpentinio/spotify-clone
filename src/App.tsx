@@ -8,6 +8,7 @@ import Album from "./pages/Album";
 import Artist from "./pages/Artist";
 import Playlist from "./pages/Playlist";
 import User from "./pages/User";
+import Genre from "./pages/Genre";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route element={<Artist />} path="/artist/:id" />
           <Route element={<Playlist />} path="/playlist/:id" />
           <Route element={<User />} path="/user/:id" />
+          <Route element={<Genre />} path="/genre/:genre" />
         </Route>
       </Routes>
     </div>

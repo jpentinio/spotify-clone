@@ -7,6 +7,8 @@ export const GET_SEARCH_START = "GET_SEARCH_START";
 export const GET_SEARCH_SUCCESS = "GET_SEARCH_SUCCESS";
 export const GET_SEARCH_FAILED = "GET_SEARCH_FAILED";
 
+export const SET_SEARCH_PARAMS = "SET_SEARCH_PARAMS";
+
 export const RESET_STATE = "RESET_STATE";
 
 export type SearchType = {
@@ -40,8 +42,14 @@ export interface ResetState {
   type: typeof RESET_STATE;
 }
 
+export interface SetSearchParams {
+  type: typeof SET_SEARCH_PARAMS;
+  payload: string;
+}
+
 export type SearchDispatchTypes =
   | GetSearchStart
   | GetSearchFailed
   | GetSearchSuccess
-  | ResetState;
+  | ResetState
+  | SetSearchParams;

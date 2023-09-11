@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import HomeActions from "../redux/home/actions";
-import { TrackCard } from "../components/cards/TrackCard";
+import { TrackCard, TrackCardLoading } from "../components/cards/TrackCard";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ const Home = () => {
     dispatch(HomeActions.getNewAlbumReleases());
   }, []);
   return (
-    <div className="p-6 min-h-screen w-full rounded-lg bg-gradient-to-t from-black to-zinc-800">
+    <div className="pt-6 pb-24 px-6 min-h-screen w-full rounded-lg bg-gradient-to-t from-black to-zinc-800">
       <div className="mt-16 flex flex-col gap-6">
         <section>
           <h1 className="cursor-pointer text-2xl font-bold hover:underline w-fit">
@@ -32,15 +32,7 @@ const Home = () => {
           </h1>
           <div className="my-6 grid grid-cols-6 gap-6">
             {recentlyPlayedTracksLoading
-              ? [...Array(11)].map(() => (
-                  <div className="bg-card p-5 flex flex-col gap-4 rounded-lg shadow-lg">
-                    <div className="animate-pulse bg-cardHover w-full h-48 rounded-md"></div>
-                    <div className="animate-pulse flex flex-col gap-2">
-                      <div className="bg-cardHover w-full h-6 rounded-md"></div>
-                      <div className="bg-cardHover w-24 h-4 rounded-md"></div>
-                    </div>
-                  </div>
-                ))
+              ? [...Array(11)].map(() => <TrackCardLoading />)
               : recentlyPlayedTracks.length > 0
               ? recentlyPlayedTracks.map((item, index) => (
                   <TrackCard
@@ -62,18 +54,7 @@ const Home = () => {
           </h1>
           <div className="my-6 grid grid-cols-6 gap-6">
             {newAlbumReleasesLoading
-              ? [...Array(11)].map((i) => (
-                  <div
-                    key={i}
-                    className="bg-card p-5 flex flex-col gap-4 rounded-lg shadow-lg"
-                  >
-                    <div className="animate-pulse bg-cardHover w-full h-48 rounded-md"></div>
-                    <div className="animate-pulse flex flex-col gap-2">
-                      <div className="bg-cardHover w-full h-6 rounded-md"></div>
-                      <div className="bg-cardHover w-24 h-4 rounded-md"></div>
-                    </div>
-                  </div>
-                ))
+              ? [...Array(11)].map((i) => <TrackCardLoading />)
               : newAlbumReleases.length > 0
               ? newAlbumReleases.map((item, index) => (
                   <TrackCard

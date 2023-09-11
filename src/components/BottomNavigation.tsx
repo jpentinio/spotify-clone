@@ -10,6 +10,11 @@ const BottomNavigation = () => {
   const [play, setPlay] = useState(false);
   const selectedTrack = useAppSelector((state) => state?.track.selectedTrack);
 
+  function spotifyCallBack(state: any) {
+    dispatch(Actions.setSpotifyCallback(state));
+    if (!state.isPlaying) setPlay(false);
+  }
+
   useEffect(() => {
     dispatch(Actions.getCurrentPlayingTrack());
   }, []);
@@ -23,9 +28,7 @@ const BottomNavigation = () => {
         token={localStorage.getItem("access_token")}
         showSaveIcon
         uris={selectedTrack ? [selectedTrack] : []}
-        callback={(state: any) => {
-          if (!state.isPlaying) setPlay(false);
-        }}
+        callback={(state: any) => spotifyCallBack(state)}
         play={play}
         hideAttribution={true}
         styles={{

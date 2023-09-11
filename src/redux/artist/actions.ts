@@ -66,6 +66,7 @@ class Actions {
               disc_number: item.disc_number,
               artists: item.artists,
               explicit: item.explicit,
+              uri: item.uri,
             };
           }),
         });

@@ -6,6 +6,7 @@ import {
   CURRENT_USER_PROFILE,
   CURRENT_USER_PROFILE_FAILED,
   CURRENT_USER_PROFILE_SUCCESS,
+  ErrorType,
   GET_USER_FAILED,
   GET_USER_START,
   GET_USER_SUCCESS,
@@ -24,24 +25,29 @@ interface UserStateType {
   currentUser: {
     data: UserProfileType;
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
   user: {
     data: UserProfileType;
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
   userTopTracks: {
     data: ArtistTopTracksType[];
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
   userTopArtists: {
     data: ArtistDetailsType[];
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
 }
+
+export const errorInitialState = {
+  message: "",
+  code: 0,
+};
 
 const initialState = {
   currentUser: {
@@ -53,7 +59,7 @@ const initialState = {
       followers: 0,
     },
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
   user: {
     data: {
@@ -64,23 +70,18 @@ const initialState = {
       followers: 0,
     },
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
   userTopTracks: {
     data: [],
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
   userTopArtists: {
     data: [],
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
-};
-
-export type Action = {
-  type: string;
-  payload?: string;
 };
 
 export const userProfileReducer = (
@@ -94,7 +95,6 @@ export const userProfileReducer = (
         currentUser: {
           ...state.currentUser,
           isLoading: true,
-          error: "",
         },
       };
     }
@@ -105,7 +105,6 @@ export const userProfileReducer = (
           ...state.currentUser,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     }
@@ -125,7 +124,6 @@ export const userProfileReducer = (
         user: {
           ...state.user,
           isLoading: true,
-          error: "",
         },
       };
     }
@@ -136,7 +134,6 @@ export const userProfileReducer = (
           ...state.user,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     }
@@ -156,7 +153,6 @@ export const userProfileReducer = (
         userTopTracks: {
           ...state.userTopTracks,
           isLoading: true,
-          error: "",
         },
       };
     }
@@ -167,7 +163,6 @@ export const userProfileReducer = (
           ...state.userTopTracks,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     }
@@ -188,7 +183,6 @@ export const userProfileReducer = (
         userTopArtists: {
           ...state.userTopArtists,
           isLoading: true,
-          error: "",
         },
       };
     }
@@ -199,7 +193,6 @@ export const userProfileReducer = (
           ...state.userTopArtists,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     }

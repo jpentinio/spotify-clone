@@ -1,10 +1,10 @@
 import axios from "axios";
 
 class Services {
-  static async getRecentlyPlayedTracks() {
+  static async getGenres() {
     try {
       let response = await axios.get(
-        `https://api.spotify.com/v1/me/player/recently-played?limit=12`,
+        `https://api.spotify.com/v1/recommendations/available-genre-seeds`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -18,10 +18,10 @@ class Services {
     }
   }
 
-  static async getNewAlbumReleases() {
+  static async getTracksByGenre(genre: string) {
     try {
       let response = await axios.get(
-        `https://api.spotify.com/v1/browse/new-releases?country=PH&limit=12`,
+        `https://api.spotify.com/v1/recommendations?seed_genres=${genre}&market=PH`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

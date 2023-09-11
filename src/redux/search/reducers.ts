@@ -3,6 +3,7 @@ import {
   GET_SEARCH_START,
   GET_SEARCH_SUCCESS,
   RESET_STATE,
+  SET_SEARCH_PARAMS,
   SearchDispatchTypes,
   SearchType,
 } from "../../types/search.actionTypes";
@@ -11,6 +12,7 @@ interface SearchStateTypes {
   data: SearchType;
   isLoading: boolean;
   error: string;
+  searchParams: string;
 }
 
 const initialState = {
@@ -22,6 +24,7 @@ const initialState = {
   },
   isLoading: false,
   error: "",
+  searchParams: "",
 };
 
 export const searchReducer = (
@@ -47,6 +50,12 @@ export const searchReducer = (
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    }
+    case SET_SEARCH_PARAMS: {
+      return {
+        ...state,
+        searchParams: action.payload,
       };
     }
     case RESET_STATE: {

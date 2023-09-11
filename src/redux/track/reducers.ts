@@ -4,7 +4,9 @@ import {
   GET_CURRENT_PLAYING_TRACK_FAILED,
   GET_CURRENT_PLAYING_TRACK_START,
   GET_CURRENT_PLAYING_TRACK_SUCCESS,
+  SET_SPOTIFY_CALLBACK,
   SET_TRACK,
+  SpotifyCallbackType,
 } from "../../types/track.actionTypes";
 
 interface CurrentPlayingTrackState {
@@ -14,6 +16,7 @@ interface CurrentPlayingTrackState {
     error: string;
   };
   selectedTrack: string;
+  spotifyCallback: SpotifyCallbackType;
 }
 
 type TrackStateTypes = CurrentPlayingTrackState;
@@ -38,6 +41,17 @@ const initialState = {
     error: "",
   },
   selectedTrack: "",
+  spotifyCallback: {
+    isActive: false,
+    isPlaying: false,
+    deviceId: "",
+    track: {
+      artists: [],
+      id: "",
+      name: "",
+      uri: "",
+    },
+  },
 };
 
 type DispatchTypes = CurrentlyPlayingTrackDispatchTypes;
@@ -80,6 +94,13 @@ export const trackReducer = (
       return {
         ...state,
         selectedTrack: action.payload,
+      };
+    }
+
+    case SET_SPOTIFY_CALLBACK: {
+      return {
+        ...state,
+        spotifyCallback: action.payload,
       };
     }
     default:

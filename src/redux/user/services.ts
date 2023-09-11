@@ -13,7 +13,7 @@ class Services {
 
       return response;
     } catch (error: any) {
-      throw error.response;
+      throw error.response.data.error;
     }
   }
 
@@ -27,7 +27,7 @@ class Services {
 
       return response;
     } catch (error: any) {
-      throw error.response;
+      throw error.response.data.error;
     }
   }
 
@@ -44,7 +44,7 @@ class Services {
 
       return response;
     } catch (error: any) {
-      throw error.response;
+      throw error.response.data.error;
     }
   }
 
@@ -61,7 +61,7 @@ class Services {
 
       return response;
     } catch (error: any) {
-      throw error.response;
+      throw error.response.data.error;
     }
   }
 }

@@ -5,6 +5,7 @@ import {
   GET_SEARCH_START,
   GET_SEARCH_SUCCESS,
   RESET_STATE,
+  SET_SEARCH_PARAMS,
   SearchDispatchTypes,
 } from "../../types/search.actionTypes";
 
@@ -36,6 +37,12 @@ class Actions {
   static resetState() {
     return async (dispatch: Dispatch<SearchDispatchTypes>) => {
       dispatch({ type: RESET_STATE });
+    };
+  }
+
+  static setSearchParams(value: string) {
+    return async (dispatch: Dispatch<SearchDispatchTypes>) => {
+      dispatch({ type: SET_SEARCH_PARAMS, payload: value });
     };
   }
 }

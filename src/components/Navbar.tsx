@@ -10,6 +10,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+import { getRandomColorFromArray } from "../utils/utils";
 
 const UserIconModal = ({
   open,
@@ -49,6 +50,7 @@ const Searchfield = () => {
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearchParams({ q: encodeURI(e.target.value) });
+    dispatch(SearchActions.setSearchParams(e.target.value));
   };
 
   useEffect(() => {
@@ -57,9 +59,8 @@ const Searchfield = () => {
     }
     const timer = setTimeout(() => {
       if (searchQuery) {
+        dispatch(SearchActions.setSearchParams(searchQuery));
         fetchData();
-      } else {
-        dispatch(SearchActions.resetState());
       }
     }, 500);
 
@@ -86,6 +87,7 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const user = useAppSelector((state) => state?.user?.currentUser.data);
+  const theme = useAppSelector((state) => state?.home?.theme);
 
   const logout = () => {
     dispatch(Actions.userLogout());
@@ -94,9 +96,17 @@ const Navbar = ({ positionTop }: { positionTop: number }) => {
 
   return (
     <div
-      className={`fixed z-20 px-6 py-2 bg-transparent flex justify-between items-center left-[330px] right-[18px] ${
-        positionTop >= 100 ? "bg-zinc-800" : "bg-transparent"
-      }`}
+      className={`fixed z-20 px-6 py-2 bg-transparent flex justify-between items-center left-[330px] right-[18px]`}
+      style={{
+        backgroundColor:
+          positionTop >= 100
+            ? location.pathname === "/"
+              ? "#27272A"
+              : location.pathname.includes("/search")
+              ? "#121212"
+              : theme.hexcode
+            : "transparent",
+      }}
     >
       <div className="flex items-center gap-2">
         <button

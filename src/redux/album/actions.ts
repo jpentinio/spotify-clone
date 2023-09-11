@@ -11,6 +11,7 @@ import {
   UserSavedAlbumType,
 } from "../../types/album.actionTypes";
 import { TrackType } from "../../types/track.actionTypes";
+import { checkTokenIfExpired } from "../../utils/utils";
 
 class Actions {
   static getAlbum(id: string) {
@@ -50,9 +51,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_ALBUM_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };
@@ -74,9 +76,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_USER_ALBUM_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };

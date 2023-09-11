@@ -1,4 +1,5 @@
 import {
+  ColorType,
   GET_NEW_ALBUM_RELEASES_FAILED,
   GET_NEW_ALBUM_RELEASES_START,
   GET_NEW_ALBUM_RELEASES_SUCCESS,
@@ -9,13 +10,17 @@ import {
   NewAlbumReleasesType,
   RecentlyPlayedTracksDispatchTypes,
   RecentlyPlayedTracksType,
+  SET_COLOR_THEME,
+  SetColorTheme,
 } from "../../types/home.actionTypes";
+import { ErrorType } from "../../types/userProfile.actionTypes";
+import { errorInitialState } from "../user/reducers";
 
 interface RecentlyPlayedTracksStateTypes {
   recentlyPlayedTracks: {
     data: RecentlyPlayedTracksType[];
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
 }
 
@@ -23,29 +28,40 @@ interface NewAlbumReleasesStateTypes {
   newAlbumReleases: {
     data: NewAlbumReleasesType[];
     isLoading: boolean;
-    error: string;
+    error: ErrorType;
   };
 }
 
+interface ThemeStateTypes {
+  theme: ColorType;
+}
+
 type HomeStateTypes = RecentlyPlayedTracksStateTypes &
-  NewAlbumReleasesStateTypes;
+  NewAlbumReleasesStateTypes &
+  ThemeStateTypes;
 
 const initialState = {
   recentlyPlayedTracks: {
     data: [],
     isLoading: false,
-    error: "",
+    error: errorInitialState,
   },
   newAlbumReleases: {
     data: [],
     isLoading: false,
-    error: "",
+    error: errorInitialState,
+  },
+  theme: {
+    hexcode: "",
+    background: "",
+    gradient: "",
   },
 };
 
 type DispatchTypes =
   | RecentlyPlayedTracksDispatchTypes
-  | NewAlbumReleasesDispatchTypes;
+  | NewAlbumReleasesDispatchTypes
+  | SetColorTheme;
 
 export const homeReducer = (
   state: HomeStateTypes = initialState,
@@ -58,7 +74,6 @@ export const homeReducer = (
         recentlyPlayedTracks: {
           ...state.recentlyPlayedTracks,
           isLoading: true,
-          error: "",
         },
       };
     case GET_RECENTLY_PLAYED_SUCCESS:
@@ -68,7 +83,6 @@ export const homeReducer = (
           ...state.recentlyPlayedTracks,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     case GET_RECENTLY_PLAYED_FAILED: {
@@ -88,7 +102,6 @@ export const homeReducer = (
         newAlbumReleases: {
           ...state.newAlbumReleases,
           isLoading: true,
-          error: "",
         },
       };
     case GET_NEW_ALBUM_RELEASES_SUCCESS:
@@ -98,7 +111,6 @@ export const homeReducer = (
           ...state.newAlbumReleases,
           data: action.payload,
           isLoading: false,
-          error: "",
         },
       };
     case GET_NEW_ALBUM_RELEASES_FAILED: {
@@ -109,6 +121,12 @@ export const homeReducer = (
           isLoading: false,
           error: action.payload,
         },
+      };
+    }
+    case SET_COLOR_THEME: {
+      return {
+        ...state,
+        theme: action.payload,
       };
     }
     default:

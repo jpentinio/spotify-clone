@@ -7,6 +7,9 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { useState } from "react";
 import BottomNavigation from "./components/BottomNavigation";
 import Actions from "./redux/user/actions";
+import HomeActions from "./redux/home/actions";
+import { getRandomColorFromArray } from "./utils/utils";
+import { hexcodeColors } from "./constants";
 
 export function PrivateRoutes() {
   const navigate = useNavigate();
@@ -15,8 +18,7 @@ export function PrivateRoutes() {
   const accessToken = localStorage.getItem("access_token") || "";
   const location = useLocation();
   const queryParameters = new URLSearchParams(location.hash);
-
-  console.log(queryParameters);
+  const color = getRandomColorFromArray();
 
   useEffect(() => {
     if (queryParameters.get("#access_token")) {
@@ -32,7 +34,7 @@ export function PrivateRoutes() {
     }
   }, []);
 
-  const myElementRef = useRef(null);
+  const myElementRef = useRef<HTMLDivElement | null>(null);
   const [positionTop, setPositionTop] = useState(0);
 
   useEffect(() => {
@@ -50,18 +52,25 @@ export function PrivateRoutes() {
         element.removeEventListener("scroll", handleScroll);
       };
     }
-  }, []);
+  }, [accessToken]);
 
-  console.log(accessToken);
+  useEffect(() => {
+    dispatch(HomeActions.setColorTheme(color));
+    if (myElementRef.current) {
+      myElementRef.current.scrollTo({ top: 0 });
+    }
+  }, [location.pathname]);
 
-  return accessToken === "" || user?.error === "The access token expired" ? (
+  return accessToken === "" ||
+    user?.error.message === "The access token expired" ||
+    user?.error.message === "Invalid access token" ? (
     <Navigate to="/login" />
   ) : (
     <div className="flex flex-row gap-2 bg-black p-2 max-h-[93vh] overflow-hidden">
       <Sidebar />
       <div
         ref={myElementRef}
-        className="relative max-h-screen overflow-y-auto flex-1"
+        className="relative max-h-screen h-screen overflow-y-auto flex-1"
       >
         <Navbar positionTop={positionTop} />
         <Outlet />

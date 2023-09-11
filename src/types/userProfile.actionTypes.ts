@@ -19,6 +19,11 @@ export const GET_USER_TOP_ARTISTS_FAILED = "GET_USER_TOP_ARTISTS_FAILED";
 
 export const USER_LOGOUT = "USER_LOGOUT";
 
+export type ErrorType = {
+  message: string | null;
+  code: number | null;
+};
+
 export type UserProfileType = {
   display_name: string;
   id?: string;
@@ -33,7 +38,7 @@ export interface CurrentUserProfileStart {
 
 export interface CurrentUserProfileFailed {
   type: typeof CURRENT_USER_PROFILE_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface CurrentUserProfileSuccess {
@@ -49,7 +54,7 @@ export interface GetUserStart {
 
 export interface GetUserFailed {
   type: typeof GET_USER_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface GetUserSuccess {
@@ -65,7 +70,7 @@ export interface GetUserTopTracksStart {
 
 export interface GetUserTopTracksFailed {
   type: typeof GET_USER_TOP_TRACKS_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface GetUserTopTracksSuccess {
@@ -81,7 +86,7 @@ export interface GetUserTopArtistsStart {
 
 export interface GetUserTopArtistsFailed {
   type: typeof GET_USER_TOP_ARTISTS_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface GetUserTopArtistsSuccess {

@@ -1,3 +1,5 @@
+import { ErrorType } from "./userProfile.actionTypes";
+
 export const GET_RECENTLY_PLAYED_START = "GET_RECENTLY_PLAYED_START";
 export const GET_RECENTLY_PLAYED_SUCCESS = "GET_RECENTLY_PLAYED_SUCCESS";
 export const GET_RECENTLY_PLAYED_FAILED = "GET_RECENTLY_PLAYED_FAILED";
@@ -5,6 +7,8 @@ export const GET_RECENTLY_PLAYED_FAILED = "GET_RECENTLY_PLAYED_FAILED";
 export const GET_NEW_ALBUM_RELEASES_START = "GET_NEW_ALBUM_RELEASES_START";
 export const GET_NEW_ALBUM_RELEASES_SUCCESS = "GET_NEW_ALBUM_RELEASES_SUCCESS";
 export const GET_NEW_ALBUM_RELEASES_FAILED = "GET_NEW_ALBUM_RELEASES_FAILED";
+
+export const SET_COLOR_THEME = "SET_COLOR_THEME";
 
 export type ArtistType = {
   name: string;
@@ -40,6 +44,12 @@ export type NewAlbumReleasesType = {
   uri: string;
 };
 
+export type ColorType = {
+  hexcode: string;
+  background: string;
+  gradient: string;
+};
+
 // Recently Played Tracks
 
 export interface RecentlyPlayedTracksStart {
@@ -48,7 +58,7 @@ export interface RecentlyPlayedTracksStart {
 
 export interface RecentlyPlayedTracksFailed {
   type: typeof GET_RECENTLY_PLAYED_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface RecentlyPlayedTracksSuccess {
@@ -64,7 +74,7 @@ export interface NewAlbumReleasesStart {
 
 export interface NewAlbumReleasesFailed {
   type: typeof GET_NEW_ALBUM_RELEASES_FAILED;
-  payload: string;
+  payload: ErrorType;
 }
 
 export interface NewAlbumReleasesSuccess {
@@ -72,6 +82,10 @@ export interface NewAlbumReleasesSuccess {
   payload: NewAlbumReleasesType[];
 }
 
+export interface SetColorTheme {
+  type: typeof SET_COLOR_THEME;
+  payload: ColorType;
+}
 export type RecentlyPlayedTracksDispatchTypes =
   | RecentlyPlayedTracksStart
   | RecentlyPlayedTracksFailed

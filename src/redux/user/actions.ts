@@ -18,6 +18,7 @@ import {
   USER_LOGOUT,
   UserDispatchTypes,
 } from "../../types/userProfile.actionTypes";
+import { checkTokenIfExpired } from "../../utils/utils";
 import Services from "./services";
 import { Dispatch } from "redux";
 
@@ -39,10 +40,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
-        console.log(error);
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: CURRENT_USER_PROFILE_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };
@@ -65,10 +66,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
-        console.log(error);
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_USER_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };
@@ -98,10 +99,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
-        console.log(error);
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_USER_TOP_TRACKS_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };
@@ -131,10 +132,10 @@ class Actions {
         });
         return response;
       } catch (error: any) {
-        console.log(error);
+        checkTokenIfExpired({ status: error.status, message: error.message });
         dispatch({
           type: GET_USER_TOP_ARTISTS_FAILED,
-          payload: error.data.error.message,
+          payload: error,
         });
       }
     };
