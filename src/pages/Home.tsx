@@ -54,7 +54,7 @@ const Home = () => {
           </h1>
           <div className="my-6 grid grid-cols-6 gap-6">
             {newAlbumReleasesLoading
-              ? [...Array(11)].map((i) => <TrackCardLoading />)
+              ? [...Array(11)].map(() => <TrackCardLoading />)
               : newAlbumReleases.length > 0
               ? newAlbumReleases.map((item, index) => (
                   <TrackCard

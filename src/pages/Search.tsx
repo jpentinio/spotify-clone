@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TrackCard } from "../components/cards/TrackCard";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import moment from "moment";
@@ -8,7 +8,6 @@ import { FaPlay } from "react-icons/fa";
 import { useEffect } from "react";
 import SearchActions from "../redux/search/actions";
 import GenresActions from "../redux/genres/actions";
-import TrackActions from "../redux/track/actions";
 import GenreCard from "../components/cards/GenreCard";
 import { createHandleSetTrack } from "../utils/utils";
 import { TrackTableLoading } from "../components/TracksTable";

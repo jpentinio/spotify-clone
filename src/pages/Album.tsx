@@ -7,7 +7,7 @@ import { FaPlay } from "react-icons/fa";
 import { HiHeart } from "react-icons/hi";
 import { SlOptions } from "react-icons/sl";
 import { TracksTable } from "../components/TracksTable";
-import { createHandleSetTrack, getRandomColorFromArray } from "../utils/utils";
+import { createHandleSetTrack } from "../utils/utils";
 
 const Album = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,7 +15,6 @@ const Album = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state?.album.album.data);
   const isLoading = useAppSelector((state) => state?.album.album.isLoading);
-  const selectedTrack = useAppSelector((state) => state.track.selectedTrack);
   const theme = useAppSelector((state) => state.home.theme);
   const handleSetTrack = createHandleSetTrack(dispatch);
 

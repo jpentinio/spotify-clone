@@ -9,7 +9,6 @@ import BottomNavigation from "./components/BottomNavigation";
 import Actions from "./redux/user/actions";
 import HomeActions from "./redux/home/actions";
 import { getRandomColorFromArray } from "./utils/utils";
-import { hexcodeColors } from "./constants";
 
 export function PrivateRoutes() {
   const navigate = useNavigate();

@@ -4,13 +4,7 @@ import SearchActions from "../redux/search/actions";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { Tooltip } from "react-tooltip";
-import {
-  createSearchParams,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { getRandomColorFromArray } from "../utils/utils";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const UserIconModal = ({
   open,

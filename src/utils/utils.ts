@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 import TrackActions from "../redux/track/actions";
-import TrackServices from "../redux/track/services";
-import { albumColors, colors } from "../constants";
+
+import { colors } from "../constants";
 
 type DispatchType = (action: any) => void;
 

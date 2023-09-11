@@ -8,11 +8,7 @@ import { FiClock } from "react-icons/fi";
 import { LuMusic4 } from "react-icons/lu";
 import moment from "moment";
 import UserActions from "../redux/user/actions";
-import {
-  createHandleSetTrack,
-  getRandomColorFromArray,
-  setPlaybackState,
-} from "../utils/utils";
+import { createHandleSetTrack, setPlaybackState } from "../utils/utils";
 import { Loading } from "../components/Loading";
 
 const Playlist = () => {
